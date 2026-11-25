@@ -1,0 +1,1570 @@
+<!DOCTYPE html>
+<html lang="ar" dir="rtl" class="dark">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>الخلاصة | منصة إبراهيم محمود التعليمية</title>
+    <!-- خطوط جوجل العربية العصرية: القاهرة وتجوال -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Cairo:wght@400;600;700;800;900&family=Tajawal:wght@400;500;700;800&display=swap" rel="stylesheet">
+    <!-- مكتبة الأيقونات FontAwesome -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css">
+    <!-- مكتبة Tailwind CSS -->
+    <script src="https://cdn.tailwindcss.com"></script>
+    <script>
+        tailwind.config = {
+            darkMode: 'class',
+            theme: {
+                extend: {
+                    fontFamily: {
+                        cairo: ['Cairo', 'sans-serif'],
+                        tajawal: ['Tajawal', 'sans-serif'],
+                    },
+                    colors: {
+                        mono: {
+                            black: '#000000',
+                            void: '#0a0a0a',
+                            dark: '#141414',
+                            card: '#1a1a1a',
+                            border: '#2b2b2b',
+                            muted: '#666666',
+                            silver: '#a3a3a3',
+                            light: '#e5e5e5',
+                            paper: '#f5f5f5',
+                            white: '#ffffff',
+                        }
+                    }
+                }
+            }
+        }
+    </script>
+    <style>
+        /* إعدادات الخطوط والتمرير */
+        body {
+            font-family: 'Cairo', 'Tajawal', sans-serif;
+            transition: background-color 0.35s ease, color 0.35s ease;
+            overflow-x: hidden;
+        }
+
+        /* شريط تمرير أحادي اللون أنيق */
+        ::-webkit-scrollbar {
+            width: 8px;
+        }
+        ::-webkit-scrollbar-track {
+            background: #141414;
+        }
+        html:not(.dark) ::-webkit-scrollbar-track {
+            background: #f5f5f5;
+        }
+        ::-webkit-scrollbar-thumb {
+            background: #404040;
+            border-radius: 9999px;
+        }
+        ::-webkit-scrollbar-thumb:hover {
+            background: #666666;
+        }
+
+        /* حاوية الشعار ثلاثي الأبعاد */
+        .logo-3d-stage {
+            perspective: 1100px;
+        }
+
+        .logo-3d-card {
+            transform-style: preserve-3d;
+            transition: transform 0.15s ease-out, box-shadow 0.3s ease;
+            animation: float3D 6s ease-in-out infinite;
+        }
+
+        .logo-3d-card:hover {
+            animation-play-state: paused;
+        }
+
+        .logo-3d-layer-1 {
+            transform: translateZ(20px);
+        }
+        .logo-3d-layer-2 {
+            transform: translateZ(42px);
+        }
+        .logo-3d-layer-3 {
+            transform: translateZ(62px);
+        }
+
+        @keyframes float3D {
+            0%, 100% {
+                transform: rotateY(-8deg) rotateX(6deg) translateY(0px);
+            }
+            50% {
+                transform: rotateY(8deg) rotateX(-4deg) translateY(-10px);
+            }
+        }
+
+        /* تدرجات معدنية أحادية اللون */
+        .metallic-dark {
+            background: linear-gradient(145deg, #1f1f1f 0%, #0a0a0a 50%, #171717 100%);
+            box-shadow: 0 25px 50px -12px rgba(0, 0, 0, 0.85), inset 0 1px 0 rgba(255, 255, 255, 0.15);
+        }
+
+        .metallic-light {
+            background: linear-gradient(145deg, #ffffff 0%, #ebebeb 50%, #f7f7f7 100%);
+            box-shadow: 0 25px 50px -12px rgba(0, 0, 0, 0.18), inset 0 1px 0 rgba(255, 255, 255, 0.9);
+        }
+
+        /* تأثير زجاجي أحادي */
+        .glass-header {
+            backdrop-filter: blur(14px);
+            -webkit-backdrop-filter: blur(14px);
+        }
+
+        /* نبض خفيف للأزرار التفاعلية */
+        .btn-monochrome {
+            transition: all 0.25s cubic-bezier(0.4, 0, 0.2, 1);
+        }
+        .btn-monochrome:active {
+            transform: scale(0.97);
+        }
+    </style>
+</head>
+<body class="bg-mono-paper text-mono-void dark:bg-mono-void dark:text-mono-white min-h-screen flex flex-col selection:bg-mono-white selection:text-mono-black dark:selection:bg-mono-white dark:selection:text-mono-black">
+
+    <!-- ==================== إشعار منبثق مخصص (بديل alert) ==================== -->
+    <div id="toast-container" class="fixed bottom-5 left-5 z-[100] flex flex-col gap-3 pointer-events-none"></div>
+
+    <!-- ==================== بوابة الدخول والتسجيل الإلزامية ==================== -->
+    <div id="auth-gate" class="fixed inset-0 z-[90] bg-mono-paper/95 dark:bg-mono-black/95 backdrop-blur-xl overflow-y-auto flex items-center justify-center p-4 sm:p-6 transition-opacity duration-500">
+        <div class="w-full max-w-4xl grid grid-cols-1 lg:grid-cols-12 rounded-3xl overflow-hidden border border-mono-light dark:border-mono-border bg-mono-white dark:bg-mono-dark shadow-2xl">
+            
+            <!-- الجانب الأيمن: الشعار ثلاثي الأبعاد والترحيب -->
+            <div class="lg:col-span-5 p-6 sm:p-8 flex flex-col items-center justify-center text-center border-b lg:border-b-0 lg:border-l border-mono-light dark:border-mono-border bg-mono-paper dark:bg-mono-black relative overflow-hidden">
+                <!-- شبكة هندسية خفيفة في الخلفية -->
+                <div class="absolute inset-0 opacity-10 pointer-events-none" style="background-image: radial-gradient(#888 1px, transparent 1px); background-size: 20px 20px;"></div>
+
+                <!-- شعار 3D مصغر لبوابة الدخول -->
+                <div class="logo-3d-stage mb-6">
+                    <div class="logo-3d-card w-40 h-40 sm:w-44 sm:h-44 rounded-3xl metallic-light dark:metallic-dark border border-mono-silver/40 dark:border-mono-border flex flex-col items-center justify-center relative cursor-pointer" id="gate-3d-logo">
+                        <div class="logo-3d-layer-1 w-32 h-32 rounded-2xl border border-mono-muted/30 flex items-center justify-center">
+                            <div class="logo-3d-layer-2 flex flex-col items-center">
+                                <img id="gate-logo-img" src="" alt="شعار الخلاصة" class="hidden w-20 h-20 object-cover rounded-xl mb-1 border border-mono-silver/50 shadow-lg">
+                                <div id="gate-logo-icon" class="w-14 h-14 rounded-2xl bg-mono-black dark:bg-mono-white text-mono-white dark:text-mono-black flex items-center justify-center text-2xl font-black shadow-lg mb-2">
+                                    خ
+                                </div>
+                                <span class="logo-3d-layer-3 text-xl font-black tracking-tight text-mono-black dark:text-mono-white">الخلاصة</span>
+                                <span class="text-[10px] font-bold tracking-widest uppercase text-mono-muted dark:text-mono-silver mt-0.5">AL-KHULASA 3D</span>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <h2 class="text-2xl font-black mb-2">مرحباً بك في منصة الخلاصة</h2>
+                <p class="text-sm text-mono-muted dark:text-mono-silver leading-relaxed mb-4">
+                    «أؤمن أن شرح المناهج التعليمية لا يحتاج للحشو والساعات الطويلة»
+                </p>
+                <div class="inline-flex items-center gap-2 px-3 py-1.5 rounded-full text-xs font-bold border border-mono-light dark:border-mono-border bg-mono-white dark:bg-mono-card">
+                    <i class="fa-solid fa-user-graduate"></i>
+                    <span>بإشراف: إبراهيم محمود - الإسكندرية</span>
+                </div>
+            </div>
+
+            <!-- الجانب الأيسر: نموذج بيانات الدخول -->
+            <div class="lg:col-span-7 p-6 sm:p-8 flex flex-col justify-center">
+                <div class="flex items-center justify-between mb-6">
+                    <div>
+                        <span class="text-xs font-bold uppercase tracking-wider text-mono-muted dark:text-mono-silver">بوابة الطلاب والزوار</span>
+                        <h3 class="text-xl sm:text-2xl font-extrabold mt-0.5">تسجيل الدخول إلى المنصة</h3>
+                    </div>
+                    <!-- زر تبديل الجو المظلم والمشمس داخل البوابة أيضاً -->
+                    <button type="button" onclick="toggleTheme()" class="p-3 rounded-2xl border border-mono-light dark:border-mono-border bg-mono-paper dark:bg-mono-card hover:bg-mono-light dark:hover:bg-mono-border transition-colors" title="تبديل الجو">
+                        <i class="fa-solid fa-sun hidden dark:inline text-mono-white"></i>
+                        <i class="fa-solid fa-moon inline dark:hidden text-mono-black"></i>
+                    </button>
+                </div>
+
+                <form id="entry-form" class="space-y-4" novalidate>
+                    <!-- الاسم كامل -->
+                    <div>
+                        <label for="user-fullname" class="block text-sm font-bold mb-1.5">الاسم كامل <span class="text-mono-muted">*</span></label>
+                        <div class="relative">
+                            <span class="absolute inset-y-0 right-0 pr-3.5 flex items-center text-mono-muted pointer-events-none">
+                                <i class="fa-solid fa-user"></i>
+                            </span>
+                            <input type="text" id="user-fullname" required placeholder="اكتب اسمك الثلاثي أو الرباعي..."
+                                class="w-full pr-10 pl-4 py-3 rounded-2xl border border-mono-light dark:border-mono-border bg-mono-paper dark:bg-mono-card text-mono-black dark:text-mono-white placeholder-mono-muted focus:outline-none focus:ring-2 focus:ring-mono-black dark:focus:ring-mono-white transition-all">
+                        </div>
+                    </div>
+
+                    <!-- رقم التليفون -->
+                    <div>
+                        <label for="user-phone" class="block text-sm font-bold mb-1.5">رقم التليفون <span class="text-mono-muted">*</span></label>
+                        <div class="relative">
+                            <span class="absolute inset-y-0 right-0 pr-3.5 flex items-center text-mono-muted pointer-events-none">
+                                <i class="fa-solid fa-phone"></i>
+                            </span>
+                            <input type="tel" id="user-phone" required dir="ltr" placeholder="01xxxxxxxxx"
+                                class="w-full pr-10 pl-4 py-3 text-right rounded-2xl border border-mono-light dark:border-mono-border bg-mono-paper dark:bg-mono-card text-mono-black dark:text-mono-white placeholder-mono-muted focus:outline-none focus:ring-2 focus:ring-mono-black dark:focus:ring-mono-white transition-all">
+                        </div>
+                    </div>
+
+                    <!-- البريد الإلكتروني -->
+                    <div>
+                        <label for="user-email" class="block text-sm font-bold mb-1.5">البريد الإلكتروني <span class="text-mono-muted">*</span></label>
+                        <div class="relative">
+                            <span class="absolute inset-y-0 right-0 pr-3.5 flex items-center text-mono-muted pointer-events-none">
+                                <i class="fa-solid fa-envelope"></i>
+                            </span>
+                            <input type="email" id="user-email" required dir="ltr" placeholder="example@gmail.com"
+                                class="w-full pr-10 pl-4 py-3 text-right rounded-2xl border border-mono-light dark:border-mono-border bg-mono-paper dark:bg-mono-card text-mono-black dark:text-mono-white placeholder-mono-muted focus:outline-none focus:ring-2 focus:ring-mono-black dark:focus:ring-mono-white transition-all">
+                        </div>
+                    </div>
+
+                    <!-- السنة الدراسية، الفصل الدراسي، والمادة -->
+                    <div class="grid grid-cols-1 sm:grid-cols-3 gap-3">
+                        <div>
+                            <label for="user-grade" class="block text-xs font-bold mb-1.5">السنة الدراسية <span class="text-mono-muted">*</span></label>
+                            <select id="user-grade" required
+                                class="w-full px-3 py-3 rounded-2xl border border-mono-light dark:border-mono-border bg-mono-paper dark:bg-mono-card text-mono-black dark:text-mono-white text-xs font-bold focus:outline-none focus:ring-2 focus:ring-mono-black dark:focus:ring-mono-white transition-all">
+                                <option value="">اختر السنة...</option>
+                                <option value="الصف الأول الإعدادي">الأول الإعدادي</option>
+                                <option value="الصف الثاني الإعدادي">الثاني الإعدادي</option>
+                                <option value="الصف الثالث الإعدادي" selected>الثالث الإعدادي</option>
+                                <option value="الصف الأول الثانوي">الأول الثانوي</option>
+                                <option value="الصف الثاني الثانوي">الثاني الثانوي</option>
+                                <option value="الصف الثالث الثانوي">الثالث الثانوي</option>
+                                <option value="أخرى">مرحلة أخرى</option>
+                            </select>
+                        </div>
+
+                        <div>
+                            <label for="user-term" class="block text-xs font-bold mb-1.5">الفصل الدراسي <span class="text-mono-muted">*</span></label>
+                            <select id="user-term" required
+                                class="w-full px-3 py-3 rounded-2xl border border-mono-light dark:border-mono-border bg-mono-paper dark:bg-mono-card text-mono-black dark:text-mono-white text-xs font-bold focus:outline-none focus:ring-2 focus:ring-mono-black dark:focus:ring-mono-white transition-all">
+                                <option value="">اختر الفصل...</option>
+                                <option value="الفصل الدراسي الأول" selected>الفصل الدراسي الأول</option>
+                                <option value="الفصل الدراسي الثاني">الفصل الدراسي الثاني</option>
+                            </select>
+                        </div>
+
+                        <div>
+                            <label for="user-subject" class="block text-xs font-bold mb-1.5">المادة الدراسية <span class="text-mono-muted">*</span></label>
+                            <select id="user-subject" required
+                                class="w-full px-3 py-3 rounded-2xl border border-mono-light dark:border-mono-border bg-mono-paper dark:bg-mono-card text-mono-black dark:text-mono-white text-xs font-bold focus:outline-none focus:ring-2 focus:ring-mono-black dark:focus:ring-mono-white transition-all">
+                                <option value="">اختر المادة...</option>
+                                <option value="الدراسات الاجتماعية" selected>الدراسات الاجتماعية</option>
+                                <option value="التاريخ">التاريخ</option>
+                                <option value="الجغرافيا">الجغرافيا</option>
+                                <option value="اللغة العربية">اللغة العربية</option>
+                                <option value="العلوم">العلوم</option>
+                                <option value="الرياضيات">الرياضيات</option>
+                                <option value="اللغة الإنجليزية">اللغة الإنجليزية</option>
+                                <option value="جميع المواد">جميع المواد</option>
+                            </select>
+                        </div>
+                    </div>
+
+                    <!-- الرقم السري القوي -->
+                    <div>
+                        <div class="flex items-center justify-between mb-1.5">
+                            <label for="user-password" class="text-sm font-bold">رقم سري قوي <span class="text-mono-muted">*</span></label>
+                            <span id="password-strength-label" class="text-xs font-extrabold px-2.5 py-0.5 rounded-full bg-mono-paper dark:bg-mono-card border border-mono-light dark:border-mono-border text-mono-muted">
+                                أدخل كلمة مرور قوية
+                            </span>
+                        </div>
+                        <div class="relative">
+                            <span class="absolute inset-y-0 right-0 pr-3.5 flex items-center text-mono-muted pointer-events-none">
+                                <i class="fa-solid fa-lock"></i>
+                            </span>
+                            <input type="password" id="user-password" required placeholder="8 أحرف على الأقل (حروف + أرقام + رموز)"
+                                class="w-full pr-10 pl-12 py-3 rounded-2xl border border-mono-light dark:border-mono-border bg-mono-paper dark:bg-mono-card text-mono-black dark:text-mono-white placeholder-mono-muted focus:outline-none focus:ring-2 focus:ring-mono-black dark:focus:ring-mono-white transition-all">
+                            <button type="button" id="toggle-pass-vis" class="absolute inset-y-0 left-0 pl-3.5 flex items-center text-mono-muted hover:text-mono-black dark:hover:text-mono-white">
+                                <i class="fa-solid fa-eye"></i>
+                            </button>
+                        </div>
+
+                        <!-- شريط قياس قوة الرقم السري (أبيض / رمادي / أسود) -->
+                        <div class="grid grid-cols-4 gap-1.5 mt-2">
+                            <div id="str-bar-1" class="h-1.5 rounded-full bg-mono-light dark:bg-mono-border transition-all duration-300"></div>
+                            <div id="str-bar-2" class="h-1.5 rounded-full bg-mono-light dark:bg-mono-border transition-all duration-300"></div>
+                            <div id="str-bar-3" class="h-1.5 rounded-full bg-mono-light dark:bg-mono-border transition-all duration-300"></div>
+                            <div id="str-bar-4" class="h-1.5 rounded-full bg-mono-light dark:bg-mono-border transition-all duration-300"></div>
+                        </div>
+                        <p class="text-[11px] text-mono-muted dark:text-mono-silver mt-1.5">
+                            يشترط: 8 خانات فأكثر، حرف كبير أو صغير، رقم، ورمز مثل (@ # $ !).
+                        </p>
+                    </div>
+
+                    <div id="gate-error-msg" class="hidden p-3 rounded-2xl border border-mono-black dark:border-mono-white bg-mono-paper dark:bg-mono-card text-xs font-bold flex items-center gap-2">
+                        <i class="fa-solid fa-circle-exclamation"></i>
+                        <span id="gate-error-text">يرجى إكمال جميع الحقول بشكل صحيح.</span>
+                    </div>
+
+                    <button type="submit" class="btn-monochrome w-full py-3.5 px-6 rounded-2xl font-extrabold text-base bg-mono-black text-mono-white dark:bg-mono-white dark:text-mono-black hover:opacity-90 shadow-lg flex items-center justify-center gap-2 mt-2">
+                        <span>دخول إلى منصة الخلاصة</span>
+                        <i class="fa-solid fa-arrow-left"></i>
+                    </button>
+                </form>
+            </div>
+        </div>
+    </div>
+
+    <!-- ==================== شريط التنقل العلوي ==================== -->
+    <header class="sticky top-0 z-40 glass-header bg-mono-white/85 dark:bg-mono-void/85 border-b border-mono-light dark:border-mono-border">
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 h-20 flex items-center justify-between gap-3">
+            <!-- هوية المنصة في الهيدر -->
+            <a href="#" class="flex items-center gap-3 group">
+                <div class="w-11 h-11 rounded-2xl bg-mono-black dark:bg-mono-white text-mono-white dark:text-mono-black flex items-center justify-center font-black text-xl shadow-md group-hover:scale-105 transition-transform overflow-hidden">
+                    <img id="nav-logo-img" src="" alt="الخلاصة" class="hidden w-full h-full object-cover">
+                    <span id="nav-logo-text">خ</span>
+                </div>
+                <div>
+                    <h1 class="text-xl font-black tracking-tight leading-none">الخلاصة</h1>
+                    <p class="text-[11px] font-semibold text-mono-muted dark:text-mono-silver mt-1">إبراهيم محمود • الإسكندرية</p>
+                </div>
+            </a>
+
+            <!-- روابط سريعة للشاشات المتوسطة والكبيرة -->
+            <nav class="hidden md:flex items-center gap-6 text-sm font-bold">
+                <a href="#hero-section" class="hover:text-mono-muted transition-colors">الرئيسية</a>
+                <a href="#videos-section" class="hover:text-mono-muted transition-colors">مكتبة الفيديوهات</a>
+                <a href="#creator-section" class="hover:text-mono-muted transition-colors">عن المنشئ والقناة</a>
+                <a href="#wallet-section" class="hover:text-mono-muted transition-colors">المحفظة الرقمية</a>
+            </nav>
+
+            <!-- أدوات التحكم: ترحيب المستخدم، إضافة فيديو، تبديل الجو المظلم/المشمس -->
+            <div class="flex items-center gap-2 sm:gap-3">
+                <!-- اسم المستخدم وبياناته الدراسية -->
+                <div id="user-badge" class="hidden sm:flex items-center gap-2.5 px-3.5 py-2 rounded-2xl bg-mono-paper dark:bg-mono-card border border-mono-light dark:border-mono-border text-xs font-bold">
+                    <i class="fa-solid fa-circle-user text-base"></i>
+                    <div class="flex flex-col text-right">
+                        <span id="header-username" class="max-w-[130px] truncate font-extrabold leading-tight">طالب الخلاصة</span>
+                        <span id="header-academic-info" class="text-[10px] text-mono-muted dark:text-mono-silver truncate max-w-[170px]">الثالث الإعدادي • ترم أول</span>
+                    </div>
+                    <button onclick="logoutUser()" title="تعديل البيانات / تسجيل الخروج" class="mr-1 p-1 text-mono-muted hover:text-mono-black dark:hover:text-mono-white transition-colors">
+                        <i class="fa-solid fa-pen-to-square"></i>
+                    </button>
+                </div>
+
+                <!-- زر إضافة فيديو -->
+                <button onclick="openAddVideoModal()" class="btn-monochrome px-3.5 sm:px-4 py-2.5 rounded-2xl bg-mono-black text-mono-white dark:bg-mono-white dark:text-mono-black text-xs sm:text-sm font-extrabold flex items-center gap-2 shadow-sm">
+                    <i class="fa-solid fa-plus"></i>
+                    <span class="hidden xs:inline sm:inline">إضافة فيديو</span>
+                </button>
+
+                <!-- زر تبديل الجو المظلم والمشمس -->
+                <button id="theme-toggle-btn" onclick="toggleTheme()" class="btn-monochrome px-3.5 py-2.5 rounded-2xl border border-mono-light dark:border-mono-border bg-mono-paper dark:bg-mono-card text-xs sm:text-sm font-extrabold flex items-center gap-2 hover:bg-mono-light dark:hover:bg-mono-border" aria-label="تبديل الجو">
+                    <span class="hidden dark:flex items-center gap-1.5">
+                        <i class="fa-solid fa-sun"></i>
+                        <span class="hidden md:inline">جو مشمس</span>
+                    </span>
+                    <span class="flex dark:hidden items-center gap-1.5">
+                        <i class="fa-solid fa-moon"></i>
+                        <span class="hidden md:inline">جو مظلم</span>
+                    </span>
+                </button>
+            </div>
+        </div>
+    </header>
+
+    <!-- ==================== المحتوى الرئيسي للمنصة ==================== -->
+    <main class="flex-grow">
+
+        <!-- 1. قسم الواجهة الرئيسية والشعار ثلاثي الأبعاد (Hero & 3D Logo) -->
+        <section id="hero-section" class="relative py-12 sm:py-20 px-4 sm:px-6 lg:px-8 border-b border-mono-light dark:border-mono-border overflow-hidden">
+            <!-- خلفية خطوط هندسية أحادية -->
+            <div class="absolute inset-0 pointer-events-none opacity-[0.04] dark:opacity-[0.06]" style="background-image: linear-gradient(to right, #808080 1px, transparent 1px), linear-gradient(to bottom, #808080 1px, transparent 1px); background-size: 48px 48px;"></div>
+
+            <div class="max-w-7xl mx-auto grid grid-cols-1 lg:grid-cols-12 gap-10 lg:gap-12 items-center relative z-10">
+                
+                <!-- العمود الأول (الأعلى في الموبايل): الشعار ثلاثي الأبعاد التفاعلي -->
+                <div class="lg:col-span-5 flex flex-col items-center justify-center order-1">
+                    <div class="logo-3d-stage w-full flex flex-col items-center">
+                        <!-- بطاقة اللوجو ثلاثية الأبعاد -->
+                        <div id="hero-3d-logo" class="logo-3d-card w-64 h-64 sm:w-72 sm:h-72 rounded-[2.5rem] metallic-light dark:metallic-dark border-2 border-mono-silver/50 dark:border-mono-border p-5 flex items-center justify-center relative cursor-grab active:cursor-grabbing select-none">
+                            
+                            <!-- إطار داخلي بارز 3D -->
+                            <div class="logo-3d-layer-1 w-full h-full rounded-[2rem] border border-mono-muted/30 dark:border-mono-white/15 flex flex-col items-center justify-center relative bg-mono-white/40 dark:bg-mono-black/40 backdrop-blur-sm">
+                                
+                                <!-- شارة علوية 3D -->
+                                <div class="logo-3d-layer-2 absolute -top-3 px-4 py-1 rounded-full bg-mono-black dark:bg-mono-white text-mono-white dark:text-mono-black text-[11px] font-black tracking-widest uppercase shadow-md">
+                                    AL-KHULASA • 3D
+                                </div>
+
+                                <!-- صورة اللوجو المخصصة أو الأيقونة ثلاثية الأبعاد الافتراضية -->
+                                <div id="hero-custom-logo-wrapper" class="hidden logo-3d-layer-2 w-32 h-32 sm:w-36 sm:h-36 rounded-3xl overflow-hidden border-2 border-mono-black dark:border-mono-white shadow-2xl mb-3">
+                                    <img id="hero-logo-img" src="" alt="لوجو قناة الخلاصة" class="w-full h-full object-cover">
+                                </div>
+
+                                <div id="hero-default-logo-emblem" class="logo-3d-layer-2 relative flex items-center justify-center mb-3">
+                                    <!-- طبقات هندسية متداخلة تعطي عمق 3D -->
+                                    <div class="w-24 h-24 sm:w-28 sm:h-28 rounded-3xl rotate-12 border-2 border-mono-muted/40 absolute"></div>
+                                    <div class="w-24 h-24 sm:w-28 sm:h-28 rounded-3xl bg-mono-black dark:bg-mono-white text-mono-white dark:text-mono-black flex items-center justify-center shadow-2xl relative">
+                                        <span class="text-5xl sm:text-6xl font-black tracking-tighter">خ</span>
+                                        <i class="fa-solid fa-play text-xs absolute bottom-3 left-3 opacity-80"></i>
+                                    </div>
+                                </div>
+
+                                <!-- اسم القناة بارز في الطبقة الثالثة -->
+                                <h2 class="logo-3d-layer-3 text-3xl sm:text-4xl font-black tracking-tight text-mono-black dark:text-mono-white drop-shadow">
+                                    الـخـلاصـة
+                                </h2>
+                                <p class="logo-3d-layer-2 text-xs font-bold text-mono-muted dark:text-mono-silver mt-1">
+                                    إبراهيم محمود • يوتيوب
+                                </p>
+                            </div>
+                        </div>
+
+                        <!-- أزرار التحكم باللوجو ثلاثي الأبعاد -->
+                        <div class="mt-5 flex flex-wrap items-center justify-center gap-2">
+                            <label for="logo-upload-input" class="cursor-pointer px-4 py-2 rounded-2xl text-xs font-bold border border-mono-light dark:border-mono-border bg-mono-white dark:bg-mono-card hover:bg-mono-light dark:hover:bg-mono-border transition-colors flex items-center gap-2 shadow-sm">
+                                <i class="fa-solid fa-camera"></i>
+                                <span>تغيير صورة اللوجو</span>
+                            </label>
+                            <input type="file" id="logo-upload-input" accept="image/*" class="hidden">
+                            
+                            <button id="reset-logo-btn" onclick="resetCustomLogo()" class="hidden px-3 py-2 rounded-2xl text-xs font-bold border border-mono-light dark:border-mono-border bg-mono-paper dark:bg-mono-dark text-mono-muted hover:text-mono-black dark:hover:text-mono-white transition-colors">
+                                استعادة الافتراضي
+                            </button>
+                        </div>
+                        <p class="text-[11px] text-mono-muted mt-2">حرّك المؤشر أو المس الشعار لتجربة التفاعل ثلاثي الأبعاد</p>
+                    </div>
+                </div>
+
+                <!-- العمود الثاني: الرسالة التعليمية وبيانات المنصة -->
+                <div class="lg:col-span-7 text-center lg:text-right order-2">
+                    <div class="inline-flex items-center gap-2 px-4 py-1.5 rounded-full border border-mono-light dark:border-mono-border bg-mono-white dark:bg-mono-card text-xs font-extrabold mb-5 shadow-sm">
+                        <span class="w-2 h-2 rounded-full bg-mono-black dark:bg-mono-white animate-pulse"></span>
+                        <span>المنصة التعليمية الرسمية لقناة الـخلاصة على اليوتيوب</span>
+                    </div>
+
+                    <h1 class="text-3xl sm:text-5xl lg:text-6xl font-black leading-tight mb-6">
+                        المناهج الدراسية..
+                        <span class="block text-mono-muted dark:text-mono-silver mt-1">بلا حشو ولا ساعات طويلة.</span>
+                    </h1>
+
+                    <blockquote class="p-5 sm:p-6 rounded-3xl border-r-4 border-mono-black dark:border-mono-white bg-mono-white dark:bg-mono-card shadow-sm mb-8 text-right">
+                        <p class="text-base sm:text-xl font-bold leading-relaxed">
+                            «أؤمن أن شرح المناهج التعليمية لا يحتاج للحشو والساعات الطويلة؛ هنا نقدم لك الخلاصة المركزة بأسلوب ممتع ومباشر يوفر وقتك ويضمن تفوقك.»
+                        </p>
+                        <footer class="mt-3 text-xs sm:text-sm font-extrabold text-mono-muted dark:text-mono-silver flex items-center gap-2">
+                            <i class="fa-solid fa-feather-pointed"></i>
+                            <span>المنشئ: إبراهيم محمود — محافظة الإسكندرية (مواليد 23 / 10 / 2012)</span>
+                        </footer>
+                    </blockquote>
+
+                    <!-- أزرار الإجراءات السريعة -->
+                    <div class="flex flex-wrap items-center justify-center lg:justify-start gap-3 sm:gap-4">
+                        <a href="#videos-section" class="btn-monochrome px-6 py-3.5 rounded-2xl bg-mono-black text-mono-white dark:bg-mono-white dark:text-mono-black font-extrabold text-sm sm:text-base flex items-center gap-2.5 shadow-lg">
+                            <i class="fa-solid fa-circle-play"></i>
+                            <span>شاهد الفيديوهات التعليمية</span>
+                        </a>
+                        <button onclick="openAddVideoModal()" class="btn-monochrome px-6 py-3.5 rounded-2xl border-2 border-mono-black dark:border-mono-white font-extrabold text-sm sm:text-base flex items-center gap-2.5 hover:bg-mono-black hover:text-mono-white dark:hover:bg-mono-white dark:hover:text-mono-black">
+                            <i class="fa-solid fa-video"></i>
+                            <span>أضف فيديو جديد للمنصة</span>
+                        </button>
+                    </div>
+
+                    <!-- إحصائيات سريعة أحادية -->
+                    <div class="grid grid-cols-3 gap-3 sm:gap-4 mt-10 pt-8 border-t border-mono-light dark:border-mono-border">
+                        <div class="p-3 sm:p-4 rounded-2xl bg-mono-white dark:bg-mono-card border border-mono-light dark:border-mono-border">
+                            <div class="text-xl sm:text-2xl font-black" id="stat-videos-count">3</div>
+                            <div class="text-[11px] sm:text-xs font-bold text-mono-muted">فيديو تعليمي</div>
+                        </div>
+                        <div class="p-3 sm:p-4 rounded-2xl bg-mono-white dark:bg-mono-card border border-mono-light dark:border-mono-border">
+                            <div class="text-xl sm:text-2xl font-black">100%</div>
+                            <div class="text-[11px] sm:text-xs font-bold text-mono-muted">تركيز بلا حشو</div>
+                        </div>
+                        <div class="p-3 sm:p-4 rounded-2xl bg-mono-white dark:bg-mono-card border border-mono-light dark:border-mono-border">
+                            <div class="text-xl sm:text-2xl font-black">3D</div>
+                            <div class="text-[11px] sm:text-xs font-bold text-mono-muted">تجربة تفاعلية</div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- 2. قسم مكتبة الفيديوهات ومشغل العرض المباشر -->
+        <section id="videos-section" class="py-14 sm:py-20 px-4 sm:px-6 lg:px-8 max-w-7xl mx-auto">
+            <!-- رأس القسم والبحث -->
+            <div class="flex flex-col md:flex-row md:items-end justify-between gap-6 mb-8">
+                <div>
+                    <span class="text-xs font-extrabold uppercase tracking-widest text-mono-muted dark:text-mono-silver">مكتبة قناة الـخلاصة</span>
+                    <h2 class="text-2xl sm:text-4xl font-black mt-1">الدروس والشروحات المرئية</h2>
+                    <p class="text-sm text-mono-muted dark:text-mono-silver mt-1">اختر السنة والفصل والمادة لتشغيل الدرس مباشرة داخل المنصة</p>
+                </div>
+
+                <!-- حقل البحث عن الدروس -->
+                <div class="relative w-full md:w-80">
+                    <span class="absolute inset-y-0 right-0 pr-3.5 flex items-center text-mono-muted pointer-events-none">
+                        <i class="fa-solid fa-magnifying-glass text-xs"></i>
+                    </span>
+                    <input type="text" id="video-search-input" placeholder="ابحث عن درس أو شخصية أو مادة..."
+                        class="w-full pr-9 pl-4 py-2.5 rounded-2xl text-xs font-bold border border-mono-light dark:border-mono-border bg-mono-white dark:bg-mono-card focus:outline-none focus:ring-2 focus:ring-mono-black dark:focus:ring-mono-white">
+                </div>
+            </div>
+
+            <!-- أزرار وفلاتر تصفية الفيديوهات حسب السنة والفصل والمادة -->
+            <div class="p-4 sm:p-5 rounded-3xl border border-mono-light dark:border-mono-border bg-mono-white dark:bg-mono-card mb-8 shadow-sm">
+                <div class="flex flex-col lg:flex-row lg:items-center justify-between gap-4">
+                    <div class="flex items-center gap-2 text-xs font-extrabold text-mono-muted dark:text-mono-silver">
+                        <i class="fa-solid fa-filter"></i>
+                        <span>تصفية الدروس حسب بياناتك الدراسية:</span>
+                    </div>
+
+                    <div class="grid grid-cols-1 sm:grid-cols-3 lg:flex lg:flex-wrap items-center gap-2.5">
+                        <!-- فلتر السنة الدراسية -->
+                        <select id="filter-grade" onchange="applyAcademicFilters()"
+                            class="px-3.5 py-2 rounded-2xl text-xs font-extrabold border border-mono-light dark:border-mono-border bg-mono-paper dark:bg-mono-dark focus:outline-none focus:ring-2 focus:ring-mono-black dark:focus:ring-mono-white">
+                            <option value="الكل">كل السنوات الدراسية</option>
+                            <option value="الصف الأول الإعدادي">الصف الأول الإعدادي</option>
+                            <option value="الصف الثاني الإعدادي">الصف الثاني الإعدادي</option>
+                            <option value="الصف الثالث الإعدادي">الصف الثالث الإعدادي</option>
+                            <option value="الصف الأول الثانوي">الصف الأول الثانوي</option>
+                            <option value="الصف الثاني الثانوي">الصف الثاني الثانوي</option>
+                            <option value="الصف الثالث الثانوي">الصف الثالث الثانوي</option>
+                            <option value="أخرى">مرحلة أخرى</option>
+                        </select>
+
+                        <!-- فلتر الفصل الدراسي -->
+                        <select id="filter-term" onchange="applyAcademicFilters()"
+                            class="px-3.5 py-2 rounded-2xl text-xs font-extrabold border border-mono-light dark:border-mono-border bg-mono-paper dark:bg-mono-dark focus:outline-none focus:ring-2 focus:ring-mono-black dark:focus:ring-mono-white">
+                            <option value="الكل">كل الفصول الدراسية</option>
+                            <option value="الفصل الدراسي الأول">الفصل الدراسي الأول</option>
+                            <option value="الفصل الدراسي الثاني">الفصل الدراسي الثاني</option>
+                        </select>
+
+                        <!-- فلتر المادة -->
+                        <select id="filter-subject" onchange="applyAcademicFilters()"
+                            class="px-3.5 py-2 rounded-2xl text-xs font-extrabold border border-mono-light dark:border-mono-border bg-mono-paper dark:bg-mono-dark focus:outline-none focus:ring-2 focus:ring-mono-black dark:focus:ring-mono-white">
+                            <option value="الكل">كل المواد الدراسية</option>
+                            <option value="الدراسات الاجتماعية">الدراسات الاجتماعية</option>
+                            <option value="التاريخ">التاريخ</option>
+                            <option value="الجغرافيا">الجغرافيا</option>
+                            <option value="اللغة العربية">اللغة العربية</option>
+                            <option value="العلوم">العلوم</option>
+                            <option value="الرياضيات">الرياضيات</option>
+                            <option value="اللغة الإنجليزية">اللغة الإنجليزية</option>
+                            <option value="جميع المواد">جميع المواد</option>
+                        </select>
+
+                        <button type="button" onclick="resetAcademicFilters()"
+                            class="px-3.5 py-2 rounded-2xl text-xs font-bold border border-mono-light dark:border-mono-border hover:bg-mono-paper dark:hover:bg-mono-dark transition-colors">
+                            إظهار الكل
+                        </button>
+                    </div>
+                </div>
+            </div>
+
+            <!-- مشغل الفيديو المدمج المباشر (Featured Theater Player) -->
+            <div id="theater-player-container" class="mb-12 rounded-3xl overflow-hidden border border-mono-light dark:border-mono-border bg-mono-white dark:bg-mono-card shadow-xl">
+                <div class="grid grid-cols-1 lg:grid-cols-12">
+                    <div id="player-wrapper" class="lg:col-span-8 bg-mono-black aspect-video relative overflow-hidden">
+                        <iframe id="main-youtube-iframe" class="w-full h-full border-0"
+                            src="https://www.youtube.com/embed/ImjIEAq7qUs?rel=0&modestbranding=1&playsinline=1"
+                            title="مشغل فيديو منصة الخلاصة"
+                            allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share"
+                            referrerpolicy="strict-origin-when-cross-origin"
+                            allowfullscreen>
+                        </iframe>
+                    </div>
+                    <div class="lg:col-span-4 p-6 sm:p-8 flex flex-col justify-between">
+                        <div>
+                            <div class="flex flex-wrap items-center gap-1.5 mb-3">
+                                <span id="active-video-grade" class="px-2.5 py-1 rounded-full text-[11px] font-extrabold bg-mono-black text-mono-white dark:bg-mono-white dark:text-mono-black">
+                                    الصف الثالث الإعدادي
+                                </span>
+                                <span id="active-video-term" class="px-2.5 py-1 rounded-full text-[11px] font-bold bg-mono-paper dark:bg-mono-dark border border-mono-light dark:border-mono-border">
+                                    الفصل الدراسي الأول
+                                </span>
+                                <span id="active-video-subject" class="px-2.5 py-1 rounded-full text-[11px] font-bold bg-mono-paper dark:bg-mono-dark border border-mono-light dark:border-mono-border">
+                                    الدراسات الاجتماعية
+                                </span>
+                            </div>
+                            <div class="text-xs font-bold text-mono-muted flex items-center gap-1.5 mb-2">
+                                <span class="w-2 h-2 rounded-full bg-mono-black dark:bg-mono-white animate-ping"></span>
+                                <span>يعمل الآن مباشرة داخل المنصة</span>
+                            </div>
+                            <h3 id="active-video-title" class="text-xl sm:text-2xl font-black leading-snug mb-3">
+                                "سيف الله المسلول".. القائد العسكري الأسطوري الذي لم يهزم في معركة قط! ⚔️🔥
+                            </h3>
+                            <p id="active-video-desc" class="text-sm text-mono-muted dark:text-mono-silver leading-relaxed">
+                                قصة وعبقرية القائد خالد بن الوليد رضي الله عنه بأسلوب الخلاصة السريع والمشوق بعيداً عن الحشو.
+                            </p>
+                        </div>
+
+                        <div class="mt-6 pt-5 border-t border-mono-light dark:border-mono-border flex items-center justify-between gap-3">
+                            <div class="flex items-center gap-2.5">
+                                <div class="w-9 h-9 rounded-xl bg-mono-black dark:bg-mono-white text-mono-white dark:text-mono-black flex items-center justify-center font-black text-sm">
+                                    خ
+                                </div>
+                                <div>
+                                    <div class="text-xs font-extrabold">قناة الـخلاصة</div>
+                                    <div class="text-[11px] text-mono-muted">إبراهيم محمود</div>
+                                </div>
+                            </div>
+                            <a id="active-video-external-link" href="https://youtu.be/ImjIEAq7qUs" target="_blank" rel="noopener noreferrer"
+                                class="px-4 py-2 rounded-xl border border-mono-light dark:border-mono-border text-xs font-extrabold hover:bg-mono-paper dark:hover:bg-mono-dark transition-colors flex items-center gap-1.5">
+                                <span>فتح في يوتيوب</span>
+                                <i class="fa-solid fa-arrow-up-right-from-square"></i>
+                            </a>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <!-- شبكة بطاقات الفيديوهات -->
+            <div id="videos-grid" class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
+                <!-- يتم توليد البطاقات ديناميكياً عبر الجافاسكريبت -->
+            </div>
+        </section>
+
+        <!-- 3. قسم بيانات المنشئ إبراهيم محمود وتفاصيل قناة اليوتيوب -->
+        <section id="creator-section" class="py-14 sm:py-20 px-4 sm:px-6 lg:px-8 bg-mono-white dark:bg-mono-dark border-y border-mono-light dark:border-mono-border">
+            <div class="max-w-7xl mx-auto">
+                <div class="text-center max-w-2xl mx-auto mb-12">
+                    <span class="text-xs font-extrabold uppercase tracking-widest text-mono-muted dark:text-mono-silver">الهوية والمعلومات الرسمية</span>
+                    <h2 class="text-2xl sm:text-4xl font-black mt-1">عن المنشئ وقناة «الـخلاصة»</h2>
+                </div>
+
+                <div class="grid grid-cols-1 lg:grid-cols-12 gap-8">
+                    <!-- بطاقة المنشئ إبراهيم محمود -->
+                    <div class="lg:col-span-7 p-6 sm:p-8 rounded-3xl border border-mono-light dark:border-mono-border bg-mono-paper dark:bg-mono-card shadow-sm flex flex-col justify-between">
+                        <div>
+                            <div class="flex flex-col sm:flex-row sm:items-center gap-4 pb-6 border-b border-mono-light dark:border-mono-border">
+                                <div class="w-16 h-16 rounded-2xl bg-mono-black dark:bg-mono-white text-mono-white dark:text-mono-black flex items-center justify-center text-2xl font-black shrink-0 shadow-md">
+                                    إ م
+                                </div>
+                                <div>
+                                    <div class="inline-block px-2.5 py-0.5 rounded-full text-[11px] font-extrabold border border-mono-light dark:border-mono-border bg-mono-white dark:bg-mono-dark mb-1">
+                                        مؤسس ومنشئ المنصة
+                                    </div>
+                                    <h3 class="text-2xl font-black">إبراهيم محمود</h3>
+                                    <p class="text-sm text-mono-muted dark:text-mono-silver">صانع محتوى تعليمي ومطور منصة الخلاصة</p>
+                                </div>
+                            </div>
+
+                            <div class="grid grid-cols-1 sm:grid-cols-2 gap-4 my-6">
+                                <!-- المحافظة -->
+                                <div class="p-4 rounded-2xl bg-mono-white dark:bg-mono-dark border border-mono-light dark:border-mono-border flex items-start gap-3">
+                                    <div class="w-10 h-10 rounded-xl bg-mono-paper dark:bg-mono-card flex items-center justify-center shrink-0">
+                                        <i class="fa-solid fa-location-dot"></i>
+                                    </div>
+                                    <div>
+                                        <div class="text-xs font-bold text-mono-muted">المحافظة</div>
+                                        <div class="text-sm font-extrabold mt-0.5">محافظة الإسكندرية، مصر</div>
+                                    </div>
+                                </div>
+
+                                <!-- تاريخ الميلاد -->
+                                <div class="p-4 rounded-2xl bg-mono-white dark:bg-mono-dark border border-mono-light dark:border-mono-border flex items-start gap-3">
+                                    <div class="w-10 h-10 rounded-xl bg-mono-paper dark:bg-mono-card flex items-center justify-center shrink-0">
+                                        <i class="fa-solid fa-calendar-day"></i>
+                                    </div>
+                                    <div>
+                                        <div class="text-xs font-bold text-mono-muted">تاريخ الميلاد</div>
+                                        <div class="text-sm font-extrabold mt-0.5">23 أكتوبر 2012 (23/10/2012)</div>
+                                    </div>
+                                </div>
+
+                                <!-- رقم التواصل -->
+                                <div class="p-4 rounded-2xl bg-mono-white dark:bg-mono-dark border border-mono-light dark:border-mono-border flex items-start gap-3">
+                                    <div class="w-10 h-10 rounded-xl bg-mono-paper dark:bg-mono-card flex items-center justify-center shrink-0">
+                                        <i class="fa-solid fa-phone-volume"></i>
+                                    </div>
+                                    <div class="min-w-0">
+                                        <div class="text-xs font-bold text-mono-muted">للتواصل المباشر</div>
+                                        <a href="tel:01122251199" dir="ltr" class="text-sm font-extrabold mt-0.5 block hover:underline">01122251199</a>
+                                    </div>
+                                </div>
+
+                                <!-- البريد الإلكتروني -->
+                                <div class="p-4 rounded-2xl bg-mono-white dark:bg-mono-dark border border-mono-light dark:border-mono-border flex items-start gap-3">
+                                    <div class="w-10 h-10 rounded-xl bg-mono-paper dark:bg-mono-card flex items-center justify-center shrink-0">
+                                        <i class="fa-solid fa-envelope"></i>
+                                    </div>
+                                    <div class="min-w-0">
+                                        <div class="text-xs font-bold text-mono-muted">البريد الإلكتروني (Gmail)</div>
+                                        <a href="mailto:ibrahimmahmoud2347@gmail.com" class="text-xs sm:text-sm font-extrabold mt-0.5 block truncate hover:underline" title="ibrahimmahmoud2347@gmail.com">
+                                            ibrahimmahmoud2347@gmail.com
+                                        </a>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+
+                        <div class="p-4 rounded-2xl bg-mono-white dark:bg-mono-dark border border-mono-light dark:border-mono-border">
+                            <div class="text-xs font-extrabold text-mono-muted mb-1">رسالة المنصة:</div>
+                            <p class="text-sm font-bold leading-relaxed">
+                                «أؤمن أن شرح المناهج التعليمية لا يحتاج للحشو والساعات الطويلة، بل إلى الفهم العميق والتركيز الذكي على جوهر المعلومة.»
+                            </p>
+                        </div>
+                    </div>
+
+                    <!-- بطاقة تفاصيل قناة اليوتيوب "ال_خلاصه" -->
+                    <div class="lg:col-span-5 p-6 sm:p-8 rounded-3xl border-2 border-mono-black dark:border-mono-white bg-mono-paper dark:bg-mono-card shadow-lg flex flex-col justify-between relative overflow-hidden">
+                        <div>
+                            <div class="flex items-center justify-between mb-6">
+                                <span class="px-3 py-1 rounded-full text-xs font-black bg-mono-black text-mono-white dark:bg-mono-white dark:text-mono-black flex items-center gap-1.5">
+                                    <i class="fa-brands fa-youtube"></i>
+                                    <span>قناة اليوتيوب الرسمية</span>
+                                </span>
+                                <span class="text-xs font-bold text-mono-muted">@ال_خلاصه</span>
+                            </div>
+
+                            <div class="flex items-center gap-4 mb-6">
+                                <div class="w-16 h-16 rounded-full bg-mono-black dark:bg-mono-white text-mono-white dark:text-mono-black flex items-center justify-center text-3xl font-black border-4 border-mono-light dark:border-mono-border shadow-md">
+                                    خ
+                                </div>
+                                <div>
+                                    <h3 class="text-2xl font-black">قناة الـخلاصة</h3>
+                                    <p class="text-xs font-bold text-mono-muted dark:text-mono-silver mt-0.5">ملخصات الدراسات الاجتماعية والتاريخ</p>
+                                </div>
+                            </div>
+
+                            <ul class="space-y-3 text-sm mb-8">
+                                <li class="flex items-center gap-2.5">
+                                    <i class="fa-solid fa-check-circle"></i>
+                                    <span>شرح منهج الدراسات الاجتماعية للصف الثالث الإعدادي 2027</span>
+                                </li>
+                                <li class="flex items-center gap-2.5">
+                                    <i class="fa-solid fa-check-circle"></i>
+                                    <span>قصص الشخصيات التاريخية والمعارك بأسلوب سينمائي سريع</span>
+                                </li>
+                                <li class="flex items-center gap-2.5">
+                                    <i class="fa-solid fa-check-circle"></i>
+                                    <span>مراجعات نهائية مركزة تغنيك عن الساعات الطويلة</span>
+                                </li>
+                            </ul>
+                        </div>
+
+                        <div class="space-y-3">
+                            <a href="https://www.youtube.com/watch?v=ImjIEAq7qUs" target="_blank" rel="noopener noreferrer"
+                                class="btn-monochrome w-full py-3.5 px-5 rounded-2xl bg-mono-black text-mono-white dark:bg-mono-white dark:text-mono-black font-extrabold text-sm flex items-center justify-center gap-2 shadow-md">
+                                <i class="fa-brands fa-youtube text-lg"></i>
+                                <span>زيارة القناة والاشتراك على يوتيوب</span>
+                            </a>
+                            <button onclick="copyText('01122251199', 'تم نسخ رقم تواصل إبراهيم محمود: 01122251199')"
+                                class="btn-monochrome w-full py-3 px-5 rounded-2xl border border-mono-light dark:border-mono-border bg-mono-white dark:bg-mono-dark font-bold text-xs flex items-center justify-center gap-2">
+                                <i class="fa-solid fa-copy"></i>
+                                <span>نسخ رقم التواصل: 01122251199</span>
+                            </button>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- 4. قسم المحفظة الرقمية (Digital Wallet Section) -->
+        <section id="wallet-section" class="py-14 sm:py-20 px-4 sm:px-6 lg:px-8 max-w-7xl mx-auto">
+            <div class="rounded-[2.5rem] border border-mono-light dark:border-mono-border bg-mono-white dark:bg-mono-card p-6 sm:p-10 lg:p-12 shadow-xl">
+                <div class="grid grid-cols-1 lg:grid-cols-12 gap-8 lg:gap-12 items-center">
+                    
+                    <!-- الجانب الأيمن: بطاقة المحفظة الرقمية -->
+                    <div class="lg:col-span-6">
+                        <div class="inline-flex items-center gap-2 px-3.5 py-1.5 rounded-full bg-mono-paper dark:bg-mono-dark border border-mono-light dark:border-mono-border text-xs font-extrabold mb-4">
+                            <i class="fa-solid fa-wallet"></i>
+                            <span>المحفظة الرقمية الرسمية للمنصة</span>
+                        </div>
+
+                        <h2 class="text-2xl sm:text-4xl font-black mb-3">الدفع الإلكتروني ودعم المنصة</h2>
+                        <p class="text-sm sm:text-base text-mono-muted dark:text-mono-silver leading-relaxed mb-6">
+                            يمكنك استخدام المحفظة الرقمية المعتمدة لمنصة <strong>الخلاصة</strong> للاشتراك في المراجعات الخاصة أو دعم استمرار المحتوى التعليمي المجاني.
+                        </p>
+
+                        <!-- بطاقة عرض رقم المحفظة بتصميم معدني أحادي -->
+                        <div class="p-6 sm:p-7 rounded-3xl metallic-light dark:metallic-dark border border-mono-silver/50 dark:border-mono-border relative overflow-hidden">
+                            <div class="flex items-center justify-between mb-4">
+                                <span class="text-xs font-extrabold uppercase tracking-wider text-mono-muted dark:text-mono-silver">رقم المحفظة الرقمية</span>
+                                <i class="fa-solid fa-shield-halved text-lg"></i>
+                            </div>
+
+                            <div class="flex flex-col sm:flex-row sm:items-center justify-between gap-4 my-2">
+                                <div dir="ltr" class="text-3xl sm:text-4xl font-black tracking-widest font-mono select-all text-mono-black dark:text-mono-white">
+                                    01010111046
+                                </div>
+                                <button onclick="copyText('01010111046', 'تم نسخ رقم المحفظة الرقمية: 01010111046')"
+                                    class="btn-monochrome px-5 py-3 rounded-2xl bg-mono-black text-mono-white dark:bg-mono-white dark:text-mono-black font-extrabold text-xs sm:text-sm flex items-center justify-center gap-2 shadow-md shrink-0">
+                                    <i class="fa-solid fa-copy"></i>
+                                    <span>نسخ الرقم</span>
+                                </button>
+                            </div>
+
+                            <div class="mt-5 pt-4 border-t border-mono-light/60 dark:border-mono-border flex items-center justify-between text-xs font-bold text-mono-muted dark:text-mono-silver">
+                                <span>باسم: إبراهيم محمود</span>
+                                <span>متاح التحويل 24/7</span>
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- الجانب الأيسر: نموذج تأكيد عملية التحويل وسجل العمليات -->
+                    <div class="lg:col-span-6 p-6 sm:p-8 rounded-3xl bg-mono-paper dark:bg-mono-dark border border-mono-light dark:border-mono-border">
+                        <h3 class="text-lg sm:text-xl font-black mb-1">تأكيد عملية تحويل للمحفظة</h3>
+                        <p class="text-xs text-mono-muted dark:text-mono-silver mb-5">بعد التحويل إلى الرقم 01010111046، سجل بيانات العملية هنا لتوثيقها فوراً.</p>
+
+                        <form id="wallet-confirm-form" class="space-y-4">
+                            <div class="grid grid-cols-1 sm:grid-cols-2 gap-4">
+                                <div>
+                                    <label for="sender-phone" class="block text-xs font-bold mb-1.5">رقم المحفظة المُحوِّل منها</label>
+                                    <input type="tel" id="sender-phone" required dir="ltr" placeholder="010xxxxxxxx"
+                                        class="w-full px-4 py-2.5 text-right rounded-2xl border border-mono-light dark:border-mono-border bg-mono-white dark:bg-mono-card text-sm focus:outline-none focus:ring-2 focus:ring-mono-black dark:focus:ring-mono-white">
+                                </div>
+                                <div>
+                                    <label for="transfer-amount" class="block text-xs font-bold mb-1.5">المبلغ المحوّل (جنيه مصري)</label>
+                                    <input type="number" id="transfer-amount" required min="1" placeholder="مثال: 50"
+                                        class="w-full px-4 py-2.5 rounded-2xl border border-mono-light dark:border-mono-border bg-mono-white dark:bg-mono-card text-sm focus:outline-none focus:ring-2 focus:ring-mono-black dark:focus:ring-mono-white">
+                                </div>
+                            </div>
+                            <div>
+                                <label for="transfer-note" class="block text-xs font-bold mb-1.5">الغرض من التحويل (اختياري)</label>
+                                <input type="text" id="transfer-note" placeholder="دعم القناة / حجز ملخص / اشتراك..."
+                                    class="w-full px-4 py-2.5 rounded-2xl border border-mono-light dark:border-mono-border bg-mono-white dark:bg-mono-card text-sm focus:outline-none focus:ring-2 focus:ring-mono-black dark:focus:ring-mono-white">
+                            </div>
+                            <button type="submit" class="btn-monochrome w-full py-3 px-5 rounded-2xl bg-mono-black text-mono-white dark:bg-mono-white dark:text-mono-black font-extrabold text-sm flex items-center justify-center gap-2">
+                                <i class="fa-solid fa-check-double"></i>
+                                <span>تسجيل وتأكيد التحويل</span>
+                            </button>
+                        </form>
+
+                        <!-- سجل التحويلات المسجلة -->
+                        <div id="wallet-logs-wrapper" class="mt-6 pt-5 border-t border-mono-light dark:border-mono-border hidden">
+                            <div class="text-xs font-extrabold mb-3 flex items-center justify-between">
+                                <span>آخر التأكيدات المسجلة:</span>
+                                <span id="wallet-logs-count" class="px-2 py-0.5 rounded-full bg-mono-white dark:bg-mono-card border border-mono-light dark:border-mono-border">0</span>
+                            </div>
+                            <div id="wallet-logs-list" class="space-y-2 max-h-36 overflow-y-auto"></div>
+                        </div>
+                    </div>
+
+                </div>
+            </div>
+        </section>
+
+    </main>
+
+    <!-- ==================== نافذة إضافة فيديو جديد (Add Video Modal) ==================== -->
+    <div id="add-video-modal" class="fixed inset-0 z-50 hidden items-center justify-center p-4 bg-mono-black/80 backdrop-blur-sm">
+        <div class="w-full max-w-lg rounded-3xl border border-mono-light dark:border-mono-border bg-mono-white dark:bg-mono-dark p-6 sm:p-8 shadow-2xl relative animate-fadeIn">
+            <div class="flex items-center justify-between pb-4 border-b border-mono-light dark:border-mono-border mb-5">
+                <div class="flex items-center gap-2.5">
+                    <div class="w-10 h-10 rounded-2xl bg-mono-black dark:bg-mono-white text-mono-white dark:text-mono-black flex items-center justify-center">
+                        <i class="fa-solid fa-video"></i>
+                    </div>
+                    <div>
+                        <h3 class="text-lg font-black">إضافة فيديو جديد للمنصة</h3>
+                        <p class="text-xs text-mono-muted">الصق رابط يوتيوب وسيتم استخراج الفيديو تلقائياً</p>
+                    </div>
+                </div>
+                <button onclick="closeAddVideoModal()" class="w-9 h-9 rounded-xl border border-mono-light dark:border-mono-border flex items-center justify-center hover:bg-mono-paper dark:hover:bg-mono-card">
+                    <i class="fa-solid fa-xmark"></i>
+                </button>
+            </div>
+
+            <form id="add-video-form" class="space-y-4">
+                <div>
+                    <label for="new-video-url" class="block text-xs font-bold mb-1.5">رابط الفيديو على يوتيوب <span class="text-mono-muted">*</span></label>
+                    <input type="url" id="new-video-url" required dir="ltr" placeholder="https://youtu.be/... أو https://www.youtube.com/watch?v=..."
+                        class="w-full px-4 py-3 text-left rounded-2xl border border-mono-light dark:border-mono-border bg-mono-paper dark:bg-mono-card text-sm focus:outline-none focus:ring-2 focus:ring-mono-black dark:focus:ring-mono-white">
+                </div>
+
+                <div>
+                    <label for="new-video-title" class="block text-xs font-bold mb-1.5">عنوان الدرس أو الفيديو <span class="text-mono-muted">*</span></label>
+                    <input type="text" id="new-video-title" required placeholder="مثال: ملخص ثورة 1919 في 10 دقائق..."
+                        class="w-full px-4 py-3 rounded-2xl border border-mono-light dark:border-mono-border bg-mono-paper dark:bg-mono-card text-sm focus:outline-none focus:ring-2 focus:ring-mono-black dark:focus:ring-mono-white">
+                </div>
+
+                <div class="grid grid-cols-1 sm:grid-cols-3 gap-3">
+                    <div>
+                        <label for="new-video-grade" class="block text-xs font-bold mb-1.5">السنة الدراسية <span class="text-mono-muted">*</span></label>
+                        <select id="new-video-grade" required
+                            class="w-full px-3 py-3 rounded-2xl border border-mono-light dark:border-mono-border bg-mono-paper dark:bg-mono-card text-xs font-bold focus:outline-none focus:ring-2 focus:ring-mono-black dark:focus:ring-mono-white">
+                            <option value="الصف الأول الإعدادي">الصف الأول الإعدادي</option>
+                            <option value="الصف الثاني الإعدادي">الصف الثاني الإعدادي</option>
+                            <option value="الصف الثالث الإعدادي" selected>الصف الثالث الإعدادي</option>
+                            <option value="الصف الأول الثانوي">الصف الأول الثانوي</option>
+                            <option value="الصف الثاني الثانوي">الصف الثاني الثانوي</option>
+                            <option value="الصف الثالث الثانوي">الصف الثالث الثانوي</option>
+                            <option value="أخرى">مرحلة أخرى</option>
+                        </select>
+                    </div>
+
+                    <div>
+                        <label for="new-video-term" class="block text-xs font-bold mb-1.5">الفصل الدراسي <span class="text-mono-muted">*</span></label>
+                        <select id="new-video-term" required
+                            class="w-full px-3 py-3 rounded-2xl border border-mono-light dark:border-mono-border bg-mono-paper dark:bg-mono-card text-xs font-bold focus:outline-none focus:ring-2 focus:ring-mono-black dark:focus:ring-mono-white">
+                            <option value="الفصل الدراسي الأول" selected>الفصل الدراسي الأول</option>
+                            <option value="الفصل الدراسي الثاني">الفصل الدراسي الثاني</option>
+                        </select>
+                    </div>
+
+                    <div>
+                        <label for="new-video-subject" class="block text-xs font-bold mb-1.5">المادة الدراسية <span class="text-mono-muted">*</span></label>
+                        <select id="new-video-subject" required
+                            class="w-full px-3 py-3 rounded-2xl border border-mono-light dark:border-mono-border bg-mono-paper dark:bg-mono-card text-xs font-bold focus:outline-none focus:ring-2 focus:ring-mono-black dark:focus:ring-mono-white">
+                            <option value="الدراسات الاجتماعية" selected>الدراسات الاجتماعية</option>
+                            <option value="التاريخ">التاريخ</option>
+                            <option value="الجغرافيا">الجغرافيا</option>
+                            <option value="اللغة العربية">اللغة العربية</option>
+                            <option value="العلوم">العلوم</option>
+                            <option value="الرياضيات">الرياضيات</option>
+                            <option value="اللغة الإنجليزية">اللغة الإنجليزية</option>
+                            <option value="جميع المواد">جميع المواد</option>
+                        </select>
+                    </div>
+                </div>
+
+                <div>
+                    <label for="new-video-desc" class="block text-xs font-bold mb-1.5">ملخص قصير للفيديو</label>
+                    <textarea id="new-video-desc" rows="2" placeholder="اكتب نبذة مختصرة عن محتوى الفيديو..."
+                        class="w-full px-4 py-2.5 rounded-2xl border border-mono-light dark:border-mono-border bg-mono-paper dark:bg-mono-card text-sm focus:outline-none focus:ring-2 focus:ring-mono-black dark:focus:ring-mono-white"></textarea>
+                </div>
+
+                <div class="flex items-center gap-3 pt-2">
+                    <button type="submit" class="btn-monochrome flex-grow py-3.5 px-5 rounded-2xl bg-mono-black text-mono-white dark:bg-mono-white dark:text-mono-black font-extrabold text-sm flex items-center justify-center gap-2">
+                        <i class="fa-solid fa-check"></i>
+                        <span>نشر الفيديو في المنصة</span>
+                    </button>
+                    <button type="button" onclick="closeAddVideoModal()" class="py-3.5 px-5 rounded-2xl border border-mono-light dark:border-mono-border font-bold text-sm hover:bg-mono-paper dark:hover:bg-mono-card">
+                        إلغاء
+                    </button>
+                </div>
+            </form>
+        </div>
+    </div>
+
+    <!-- ==================== تذييل الصفحة (Footer) ==================== -->
+    <footer class="bg-mono-white dark:bg-mono-black border-t border-mono-light dark:border-mono-border py-10 px-4 sm:px-6 lg:px-8">
+        <div class="max-w-7xl mx-auto flex flex-col md:flex-row items-center justify-between gap-6 text-center md:text-right">
+            <div class="flex items-center gap-3">
+                <div class="w-11 h-11 rounded-2xl bg-mono-black dark:bg-mono-white text-mono-white dark:text-mono-black flex items-center justify-center font-black text-xl">
+                    خ
+                </div>
+                <div>
+                    <div class="font-black text-lg">منصة الخلاصة التعليمية</div>
+                    <div class="text-xs text-mono-muted dark:text-mono-silver">
+                        المنشئ: إبراهيم محمود • الإسكندرية (مواليد 23 / 10 / 2012)
+                    </div>
+                </div>
+            </div>
+
+            <div class="flex flex-wrap items-center justify-center gap-4 text-xs font-bold text-mono-muted dark:text-mono-silver">
+                <a href="tel:01122251199" class="hover:text-mono-black dark:hover:text-mono-white transition-colors flex items-center gap-1.5">
+                    <i class="fa-solid fa-phone"></i>
+                    <span dir="ltr">01122251199</span>
+                </a>
+                <span>•</span>
+                <button onclick="copyText('01010111046', 'تم نسخ رقم المحفظة: 01010111046')" class="hover:text-mono-black dark:hover:text-mono-white transition-colors flex items-center gap-1.5">
+                    <i class="fa-solid fa-wallet"></i>
+                    <span>المحفظة: <span dir="ltr">01010111046</span></span>
+                </button>
+                <span>•</span>
+                <a href="mailto:ibrahimmahmoud2347@gmail.com" class="hover:text-mono-black dark:hover:text-mono-white transition-colors flex items-center gap-1.5">
+                    <i class="fa-solid fa-envelope"></i>
+                    <span>ibrahimmahmoud2347@gmail.com</span>
+                </a>
+            </div>
+        </div>
+    </footer>
+
+    <!-- ==================== المنطق البرمجي والتفاعلات ==================== -->
+    <script>
+        // 1. البيانات الافتراضية لفيديوهات إبراهيم محمود
+        const DEFAULT_VIDEOS = [
+            {
+                id: 'ImjIEAq7qUs',
+                title: '"سيف الله المسلول".. القائد العسكري الأسطوري الذي لم يهزم في معركة قط! ⚔️🔥',
+                grade: 'الصف الثالث الإعدادي',
+                term: 'الفصل الدراسي الأول',
+                subject: 'الدراسات الاجتماعية',
+                description: 'قصة وعبقرية القائد خالد بن الوليد رضي الله عنه بأسلوب الخلاصة السريع والمشوق بعيداً عن الحشو.',
+                url: 'https://youtu.be/ImjIEAq7qUs'
+            },
+            {
+                id: '8GBaBIpZCpc',
+                title: 'من عرش مصر إلى الهروب ليلاً! قصة عثمان بك البرديسي وثورة "تفليسي" 🔥📜',
+                grade: 'الصف الثالث الإعدادي',
+                term: 'الفصل الدراسي الأول',
+                subject: 'التاريخ',
+                description: 'كواليس الصراع على السلطة في مصر ومواقف عثمان بك البرديسي بشرح مبسط وممتع.',
+                url: 'https://youtu.be/8GBaBIpZCpc'
+            },
+            {
+                id: 'wIY-XMuhQLg',
+                title: 'قصه الخديوي في فلم منهج الدرسات الصف الثالث الاعدادي الترم الاول 2027',
+                grade: 'الصف الثالث الإعدادي',
+                term: 'الفصل الدراسي الأول',
+                subject: 'الدراسات الاجتماعية',
+                description: 'شرح منهج الدراسات الاجتماعية للصف الثالث الإعدادي الترم الأول 2027 في قالب قصصي سينمائي.',
+                url: 'https://youtu.be/wIY-XMuhQLg'
+            }
+        ];
+
+        // حالة التطبيق
+        let videosList = [];
+        let filterGrade = 'الكل';
+        let filterTerm = 'الكل';
+        let filterSubject = 'الكل';
+        let currentSearchQuery = '';
+        let activeVideoId = 'ImjIEAq7qUs';
+
+        // مفاتيح التخزين المحلي
+        const STORAGE_KEYS = {
+            THEME: 'alkhulasa_theme',
+            USER: 'alkhulasa_user',
+            VIDEOS: 'alkhulasa_videos_v2',
+            LOGO: 'alkhulasa_custom_logo',
+            WALLET_LOGS: 'alkhulasa_wallet_logs'
+        };
+
+        // 2. نظام الإشعارات الأنيق (بديل alert)
+        function showToast(message, icon = 'fa-circle-check') {
+            const container = document.getElementById('toast-container');
+            const toast = document.createElement('div');
+            toast.className = 'pointer-events-auto flex items-center gap-3 px-4 py-3 rounded-2xl bg-mono-black text-mono-white dark:bg-mono-white dark:text-mono-black border border-mono-border shadow-2xl text-xs sm:text-sm font-extrabold transform transition-all duration-300 translate-y-4 opacity-0';
+            toast.innerHTML = `<i class="fa-solid ${icon}"></i><span>${message}</span>`;
+            container.appendChild(toast);
+
+            requestAnimationFrame(() => {
+                toast.classList.remove('translate-y-4', 'opacity-0');
+            });
+
+            setTimeout(() => {
+                toast.classList.add('translate-y-4', 'opacity-0');
+                setTimeout(() => toast.remove(), 300);
+            }, 3200);
+        }
+
+        // 3. نسخ النصوص إلى الحافظة بأمان
+        function copyText(text, successMessage) {
+            const tempInput = document.createElement('textarea');
+            tempInput.value = text;
+            document.body.appendChild(tempInput);
+            tempInput.select();
+            try {
+                document.execCommand('copy');
+                showToast(successMessage, 'fa-copy');
+            } catch (err) {
+                showToast('تم تحديد الرقم: ' + text, 'fa-info-circle');
+            }
+            document.body.removeChild(tempInput);
+        }
+
+        // 4. تبديل الوضع المظلم والمشمس
+        function initTheme() {
+            const savedTheme = localStorage.getItem(STORAGE_KEYS.THEME);
+            const htmlEl = document.documentElement;
+            if (savedTheme === 'light') {
+                htmlEl.classList.remove('dark');
+            } else {
+                htmlEl.classList.add('dark');
+            }
+        }
+
+        function toggleTheme() {
+            const htmlEl = document.documentElement;
+            const isDark = htmlEl.classList.toggle('dark');
+            localStorage.setItem(STORAGE_KEYS.THEME, isDark ? 'dark' : 'light');
+            showToast(isDark ? 'تم تفعيل الجو المظلم' : 'تم تفعيل الجو المشمس', isDark ? 'fa-moon' : 'fa-sun');
+        }
+
+        // 5. التفاعل ثلاثي الأبعاد للشعار (3D Tilt Effect)
+        function setup3DLogoInteraction(elementId) {
+            const card = document.getElementById(elementId);
+            if (!card) return;
+
+            const handleMove = (clientX, clientY) => {
+                const rect = card.getBoundingClientRect();
+                const x = clientX - rect.left;
+                const y = clientY - rect.top;
+                const centerX = rect.width / 2;
+                const centerY = rect.height / 2;
+                const rotateX = ((y - centerY) / centerY) * -18;
+                const rotateY = ((x - centerX) / centerX) * 18;
+                card.style.animation = 'none';
+                card.style.transform = `rotateX(${rotateX}deg) rotateY(${rotateY}deg) scale(1.03)`;
+            };
+
+            const handleReset = () => {
+                card.style.transform = '';
+                card.style.animation = 'float3D 6s ease-in-out infinite';
+            };
+
+            card.addEventListener('mousemove', (e) => handleMove(e.clientX, e.clientY));
+            card.addEventListener('mouseleave', handleReset);
+
+            card.addEventListener('touchmove', (e) => {
+                if (e.touches.length > 0) {
+                    handleMove(e.touches[0].clientX, e.touches[0].clientY);
+                }
+            }, { passive: true });
+            card.addEventListener('touchend', handleReset);
+        }
+
+        // 6. رفع وتخصيص صورة اللوجو ثلاثي الأبعاد
+        function initCustomLogo() {
+            const savedLogo = localStorage.getItem(STORAGE_KEYS.LOGO);
+            if (savedLogo) {
+                applyLogoImage(savedLogo);
+            }
+
+            const uploadInput = document.getElementById('logo-upload-input');
+            uploadInput.addEventListener('change', (e) => {
+                const file = e.target.files[0];
+                if (!file) return;
+                const reader = new FileReader();
+                reader.onload = function(event) {
+                    const dataUrl = event.target.result;
+                    try {
+                        localStorage.setItem(STORAGE_KEYS.LOGO, dataUrl);
+                    } catch (err) {
+                        // في حال كبر حجم الصورة يتم عرضها في الجلسة الحالية
+                    }
+                    applyLogoImage(dataUrl);
+                    showToast('تم تحديث صورة اللوجو ثلاثي الأبعاد بنجاح!', 'fa-image');
+                };
+                reader.readAsDataURL(file);
+            });
+        }
+
+        function applyLogoImage(src) {
+            // تحديث لوجو الهيرو
+            document.getElementById('hero-logo-img').src = src;
+            document.getElementById('hero-custom-logo-wrapper').classList.remove('hidden');
+            document.getElementById('hero-default-logo-emblem').classList.add('hidden');
+            document.getElementById('reset-logo-btn').classList.remove('hidden');
+
+            // تحديث لوجو النافبار
+            document.getElementById('nav-logo-img').src = src;
+            document.getElementById('nav-logo-img').classList.remove('hidden');
+            document.getElementById('nav-logo-text').classList.add('hidden');
+
+            // تحديث لوجو بوابة الدخول
+            document.getElementById('gate-logo-img').src = src;
+            document.getElementById('gate-logo-img').classList.remove('hidden');
+            document.getElementById('gate-logo-icon').classList.add('hidden');
+        }
+
+        function resetCustomLogo() {
+            localStorage.removeItem(STORAGE_KEYS.LOGO);
+            document.getElementById('hero-custom-logo-wrapper').classList.add('hidden');
+            document.getElementById('hero-default-logo-emblem').classList.remove('hidden');
+            document.getElementById('reset-logo-btn').classList.add('hidden');
+
+            document.getElementById('nav-logo-img').classList.add('hidden');
+            document.getElementById('nav-logo-text').classList.remove('hidden');
+
+            document.getElementById('gate-logo-img').classList.add('hidden');
+            document.getElementById('gate-logo-icon').classList.remove('hidden');
+            showToast('تمت استعادة الشعار ثلاثي الأبعاد الافتراضي', 'fa-rotate-left');
+        }
+
+        // 7. بوابة الدخول والتحقق من قوة الرقم السري
+        function evaluatePasswordStrength(password) {
+            let score = 0;
+            if (password.length >= 8) score++;
+            if (/[a-zA-Z\u0600-\u06FF]/.test(password)) score++;
+            if (/[0-9]/.test(password)) score++;
+            if (/[^a-zA-Z0-9\u0600-\u06FF]/.test(password)) score++;
+            return score;
+        }
+
+        function initAuthGate() {
+            const savedUser = localStorage.getItem(STORAGE_KEYS.USER);
+            const authGate = document.getElementById('auth-gate');
+
+            if (savedUser) {
+                const userObj = JSON.parse(savedUser);
+                authGate.classList.add('hidden');
+                updateHeaderUser(userObj);
+            }
+
+            const passInput = document.getElementById('user-password');
+            const toggleVisBtn = document.getElementById('toggle-pass-vis');
+            const strLabel = document.getElementById('password-strength-label');
+            const bars = [
+                document.getElementById('str-bar-1'),
+                document.getElementById('str-bar-2'),
+                document.getElementById('str-bar-3'),
+                document.getElementById('str-bar-4')
+            ];
+
+            toggleVisBtn.addEventListener('click', () => {
+                const isPass = passInput.type === 'password';
+                passInput.type = isPass ? 'text' : 'password';
+                toggleVisBtn.innerHTML = isPass ? '<i class="fa-solid fa-eye-slash"></i>' : '<i class="fa-solid fa-eye"></i>';
+            });
+
+            passInput.addEventListener('input', () => {
+                const val = passInput.value;
+                const score = evaluatePasswordStrength(val);
+
+                bars.forEach((bar, idx) => {
+                    if (idx < score) {
+                        bar.className = 'h-1.5 rounded-full bg-mono-black dark:bg-mono-white transition-all duration-300';
+                    } else {
+                        bar.className = 'h-1.5 rounded-full bg-mono-light dark:bg-mono-border transition-all duration-300';
+                    }
+                });
+
+                if (val.length === 0) {
+                    strLabel.textContent = 'أدخل كلمة مرور قوية';
+                } else if (score <= 2) {
+                    strLabel.textContent = 'ضعيف (أضف أرقام ورموز)';
+                } else if (score === 3) {
+                    strLabel.textContent = 'متوسط (أضف رمزاً خاصاً)';
+                } else {
+                    strLabel.textContent = 'قوي جداً ✓';
+                }
+            });
+
+            document.getElementById('entry-form').addEventListener('submit', (e) => {
+                e.preventDefault();
+                const fullName = document.getElementById('user-fullname').value.trim();
+                const phone = document.getElementById('user-phone').value.trim();
+                const email = document.getElementById('user-email').value.trim();
+                const grade = document.getElementById('user-grade').value;
+                const term = document.getElementById('user-term').value;
+                const subject = document.getElementById('user-subject').value;
+                const password = passInput.value;
+                const errorBox = document.getElementById('gate-error-msg');
+                const errorText = document.getElementById('gate-error-text');
+
+                if (fullName.length < 3) {
+                    errorText.textContent = 'يرجى كتابة الاسم الكامل بشكل صحيح.';
+                    errorBox.classList.remove('hidden');
+                    return;
+                }
+                if (!/^[0-9+\s-]{8,15}$/.test(phone)) {
+                    errorText.textContent = 'يرجى إدخال رقم تليفون صحيح.';
+                    errorBox.classList.remove('hidden');
+                    return;
+                }
+                if (!/^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(email)) {
+                    errorText.textContent = 'يرجى إدخال بريد إلكتروني صحيح.';
+                    errorBox.classList.remove('hidden');
+                    return;
+                }
+                if (!grade || !term || !subject) {
+                    errorText.textContent = 'يرجى اختيار السنة الدراسية والفصل الدراسي والمادة.';
+                    errorBox.classList.remove('hidden');
+                    return;
+                }
+                if (evaluatePasswordStrength(password) < 4) {
+                    errorText.textContent = 'يرجى اختيار رقم سري قوي (8 خانات على الأقل تحتوي على حروف وأرقام ورمز مثل @ أو #).';
+                    errorBox.classList.remove('hidden');
+                    return;
+                }
+
+                errorBox.classList.add('hidden');
+                const userData = { fullName, phone, email, grade, term, subject, joinedAt: new Date().toISOString() };
+                localStorage.setItem(STORAGE_KEYS.USER, JSON.stringify(userData));
+
+                updateHeaderUser(userData);
+                authGate.classList.add('opacity-0', 'pointer-events-none');
+                setTimeout(() => authGate.classList.add('hidden'), 450);
+                showToast(`أهلاً بك يا ${fullName} (${grade} - ${term}) في منصة الخلاصة!`, 'fa-hand-sparkles');
+            });
+        }
+
+        function updateHeaderUser(userObj) {
+            const badge = document.getElementById('user-badge');
+            const nameEl = document.getElementById('header-username');
+            const infoEl = document.getElementById('header-academic-info');
+            nameEl.textContent = userObj.fullName || 'طالب الخلاصة';
+            if (userObj.grade && userObj.term) {
+                infoEl.textContent = `${userObj.grade} • ${userObj.term} (${userObj.subject || ''})`;
+            }
+            badge.classList.remove('hidden');
+        }
+
+        function logoutUser() {
+            const savedUser = localStorage.getItem(STORAGE_KEYS.USER);
+            if (savedUser) {
+                try {
+                    const u = JSON.parse(savedUser);
+                    document.getElementById('user-fullname').value = u.fullName || '';
+                    document.getElementById('user-phone').value = u.phone || '';
+                    document.getElementById('user-email').value = u.email || '';
+                    if (u.grade) document.getElementById('user-grade').value = u.grade;
+                    if (u.term) document.getElementById('user-term').value = u.term;
+                    if (u.subject) document.getElementById('user-subject').value = u.subject;
+                } catch (e) {}
+            }
+            const authGate = document.getElementById('auth-gate');
+            authGate.classList.remove('hidden', 'opacity-0', 'pointer-events-none');
+            showToast('يمكنك الآن تعديل بياناتك الدراسية أو الدخول بحساب جديد.', 'fa-user-pen');
+        }
+
+        // 8. إدارة مكتبة الفيديوهات واستخراج معرف يوتيوب
+        function extractYouTubeId(url) {
+            const regExp = /(?:youtube\.com\/(?:[^\/]+\/.+\/|(?:v|e(?:mbed)?|shorts|live)\/|.*[?&]v=)|youtu\.be\/)([^"&?\/\s]{11})/i;
+            const match = url.match(regExp);
+            return match ? match[1] : null;
+        }
+
+        function initVideos() {
+            const savedVideos = localStorage.getItem(STORAGE_KEYS.VIDEOS);
+            if (savedVideos) {
+                try {
+                    videosList = JSON.parse(savedVideos);
+                } catch (e) {
+                    videosList = [...DEFAULT_VIDEOS];
+                }
+            } else {
+                videosList = [...DEFAULT_VIDEOS];
+                localStorage.setItem(STORAGE_KEYS.VIDEOS, JSON.stringify(videosList));
+            }
+
+            renderVideos();
+
+            const searchInput = document.getElementById('video-search-input');
+            if (searchInput) {
+                searchInput.addEventListener('input', (e) => {
+                    currentSearchQuery = e.target.value.trim().toLowerCase();
+                    renderVideos();
+                });
+            }
+
+            const addVideoForm = document.getElementById('add-video-form');
+            if (addVideoForm) {
+                addVideoForm.addEventListener('submit', (e) => {
+                const subjectInput = document.getElementById('new-video-subject').value;
+                const descInput = document.getElementById('new-video-desc').value.trim();
+
+                const videoId = extractYouTubeId(urlInput);
+                if (!videoId) {
+                    showToast('رابط يوتيوب غير صحيح! تأكد من نسخ الرابط بالكامل.', 'fa-triangle-exclamation');
+                    return;
+                }
+
+                const newVideo = {
+                    id: videoId,
+                    title: titleInput,
+                    grade: gradeInput,
+                    term: termInput,
+                    subject: subjectInput,
+                    description: descInput || `شرح مركز في مادة ${subjectInput} (${gradeInput} - ${termInput}) بأسلوب الخلاصة.`,
+                    url: `https://youtu.be/${videoId}`,
+                    isCustom: true
+                };
+
+                videosList.unshift(newVideo);
+                localStorage.setItem(STORAGE_KEYS.VIDEOS, JSON.stringify(videosList));
+
+                resetAcademicFilters();
+                playVideoInTheater(newVideo);
+                closeAddVideoModal();
+                addVideoForm.reset();
+                showToast('تمت إضافة الفيديو وتشغيله مباشرة داخل المنصة!', 'fa-circle-check');
+                });
+            }
+        }
+
+        function applyAcademicFilters() {
+            filterGrade = document.getElementById('filter-grade').value;
+            filterTerm = document.getElementById('filter-term').value;
+            filterSubject = document.getElementById('filter-subject').value;
+            renderVideos();
+        }
+
+        function resetAcademicFilters() {
+            document.getElementById('filter-grade').value = 'الكل';
+            document.getElementById('filter-term').value = 'الكل';
+            document.getElementById('filter-subject').value = 'الكل';
+            filterGrade = 'الكل';
+            filterTerm = 'الكل';
+            filterSubject = 'الكل';
+            renderVideos();
+        }
+
+        function playVideoInTheater(video) {
+            activeVideoId = video.id;
+            const playerWrapper = document.getElementById('player-wrapper');
+            // إعادة إنشاء عنصر iframe لضمان التشغيل الفوري المباشر بدون مشاكل تخزين مؤقت
+            playerWrapper.innerHTML = `
+                <iframe id="main-youtube-iframe" class="w-full h-full border-0"
+                    src="https://www.youtube.com/embed/${video.id}?autoplay=1&rel=0&modestbranding=1&playsinline=1"
+                    title="${video.title}"
+                    allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share"
+                    referrerpolicy="strict-origin-when-cross-origin"
+                    allowfullscreen>
+                </iframe>
+            `;
+
+            document.getElementById('active-video-title').textContent = video.title;
+            document.getElementById('active-video-grade').textContent = video.grade || 'الصف الثالث الإعدادي';
+            document.getElementById('active-video-term').textContent = video.term || 'الفصل الدراسي الأول';
+            document.getElementById('active-video-subject').textContent = video.subject || 'الدراسات الاجتماعية';
+            document.getElementById('active-video-desc').textContent = video.description;
+            document.getElementById('active-video-external-link').href = video.url || `https://youtu.be/${video.id}`;
+
+            document.getElementById('theater-player-container').scrollIntoView({ behavior: 'smooth', block: 'center' });
+            renderVideos();
+        }
+
+        function renderVideos() {
+            const grid = document.getElementById('videos-grid');
+            const statCount = document.getElementById('stat-videos-count');
+            if (statCount) statCount.textContent = videosList.length;
+
+            const filtered = videosList.filter(video => {
+                const matchesGrade = filterGrade === 'الكل' || video.grade === filterGrade;
+                const matchesTerm = filterTerm === 'الكل' || video.term === filterTerm;
+                const matchesSubject = filterSubject === 'الكل' || video.subject === filterSubject;
+                const matchesSearch = !currentSearchQuery ||
+                    video.title.toLowerCase().includes(currentSearchQuery) ||
+                    video.description.toLowerCase().includes(currentSearchQuery) ||
+                    (video.subject && video.subject.toLowerCase().includes(currentSearchQuery));
+                return matchesGrade && matchesTerm && matchesSubject && matchesSearch;
+            });
+
+            if (filtered.length === 0) {
+                grid.innerHTML = `
+                    <div class="col-span-full p-10 rounded-3xl border border-mono-light dark:border-mono-border bg-mono-white dark:bg-mono-card text-center">
+                        <i class="fa-solid fa-film text-3xl text-mono-muted mb-3"></i>
+                        <h3 class="text-lg font-extrabold">لا توجد فيديوهات مطابقة للتصفية الحالية</h3>
+                        <p class="text-xs text-mono-muted mt-1 mb-4">يمكنك الضغط على "إظهار الكل" أو إضافة فيديو جديد لهذه المادة الآن.</p>
+                        <button onclick="resetAcademicFilters()" class="px-5 py-2.5 rounded-2xl bg-mono-black text-mono-white dark:bg-mono-white dark:text-mono-black text-xs font-extrabold">
+                            إظهار جميع الفيديوهات
+                        </button>
+                    </div>
+                `;
+                return;
+            }
+
+            grid.innerHTML = filtered.map((video, index) => {
+                const isPlaying = video.id === activeVideoId;
+                const thumbUrl = `https://img.youtube.com/vi/${video.id}/hqdefault.jpg`;
+                return `
+                    <article class="group rounded-3xl overflow-hidden border ${isPlaying ? 'border-2 border-mono-black dark:border-mono-white' : 'border-mono-light dark:border-mono-border'} bg-mono-white dark:bg-mono-card shadow-sm hover:shadow-xl transition-all duration-300 flex flex-col justify-between">
+                        <div>
+                            <!-- صورة مصغرة بتأثير أحادي أنيق -->
+                            <div onclick='playVideoInTheaterByIndex(${index}, "${video.id}")' class="relative aspect-video bg-mono-black overflow-hidden cursor-pointer">
+                                <img src="${thumbUrl}" alt="${video.title}"
+                                    onerror="this.src='https://placehold.co/640x360/1a1a1a/ffffff?text=AL-KHULASA'"
+                                    class="w-full h-full object-cover grayscale contrast-125 group-hover:grayscale-0 group-hover:scale-105 transition-all duration-500">
+                                <div class="absolute inset-0 bg-mono-black/35 group-hover:bg-mono-black/15 transition-colors flex items-center justify-center">
+                                    <div class="w-14 h-14 rounded-full bg-mono-white text-mono-black flex items-center justify-center text-lg shadow-2xl group-hover:scale-110 transition-transform">
+                                        <i class="fa-solid fa-play mr-[-2px]"></i>
+                                    </div>
+                                </div>
+                                <div class="absolute top-3 right-3 flex flex-wrap gap-1.5">
+                                    <span class="px-2.5 py-1 rounded-full text-[10px] font-extrabold bg-mono-black/85 text-mono-white backdrop-blur-md">
+                                        ${video.subject || 'الدراسات الاجتماعية'}
+                                    </span>
+                                    <span class="px-2.5 py-1 rounded-full text-[10px] font-bold bg-mono-white/90 text-mono-black backdrop-blur-md">
+                                        ${video.term || 'الفصل الدراسي الأول'}
+                                    </span>
+                                </div>
+                                ${isPlaying ? '<span class="absolute bottom-3 left-3 px-2.5 py-1 rounded-lg text-[10px] font-black bg-mono-white text-mono-black">قيد التشغيل الآن</span>' : ''}
+                            </div>
+
+                            <!-- تفاصيل الفيديو -->
+                            <div class="p-5">
+                                <div class="text-[11px] font-extrabold text-mono-muted dark:text-mono-silver mb-1.5">
+                                    <i class="fa-solid fa-graduation-cap ml-1"></i>
+                                    <span>${video.grade || 'الصف الثالث الإعدادي'}</span>
+                                </div>
+                                <h3 onclick='playVideoInTheaterByIndex(${index}, "${video.id}")' class="font-extrabold text-base sm:text-lg leading-snug mb-2 cursor-pointer hover:underline line-clamp-2">
+                                    ${video.title}
+                                </h3>
+                                <p class="text-xs text-mono-muted dark:text-mono-silver line-clamp-2 leading-relaxed">
+                                    ${video.description}
+                                </p>
+                            </div>
+                        </div>
+
+                        <div class="px-5 pb-5 pt-2 flex items-center justify-between gap-2 border-t border-mono-light/60 dark:border-mono-border/60">
+                            <button onclick='playVideoInTheaterByIndex(${index}, "${video.id}")'
+                                class="btn-monochrome flex-grow py-2.5 px-4 rounded-xl bg-mono-paper dark:bg-mono-dark hover:bg-mono-black hover:text-mono-white dark:hover:bg-mono-white dark:hover:text-mono-black text-xs font-extrabold transition-colors flex items-center justify-center gap-2">
+                                <i class="fa-solid fa-play"></i>
+                                <span>تشغيل الدرس داخل المنصة</span>
+                            </button>
+                            <a href="${video.url || 'https://youtu.be/' + video.id}" target="_blank" rel="noopener noreferrer"
+                                class="p-2.5 rounded-xl border border-mono-light dark:border-mono-border text-mono-muted hover:text-mono-black dark:hover:text-mono-white transition-colors" title="مشاهدة على يوتيوب">
+                                <i class="fa-brands fa-youtube"></i>
+                            </a>
+                        </div>
+                    </article>
+                `;
+            }).join('');
+        }
+
+        function playVideoInTheaterByIndex(_, videoId) {
+            const found = videosList.find(v => v.id === videoId);
+            if (found) playVideoInTheater(found);
+        }
+
+        function openAddVideoModal() {
+            const modal = document.getElementById('add-video-modal');
+            modal.classList.remove('hidden');
+            modal.classList.add('flex');
+        }
+
+        function closeAddVideoModal() {
+            const modal = document.getElementById('add-video-modal');
+            modal.classList.add('hidden');
+            modal.classList.remove('flex');
+        }
+
+        // 9. نظام المحفظة الرقمية وسجل التحويلات
+        function initWalletSystem() {
+            renderWalletLogs();
+
+            document.getElementById('wallet-confirm-form').addEventListener('submit', (e) => {
+                e.preventDefault();
+                const sender = document.getElementById('sender-phone').value.trim();
+                const amount = document.getElementById('transfer-amount').value.trim();
+                const note = document.getElementById('transfer-note').value.trim();
+
+                if (!sender || !amount) return;
+
+                const logs = JSON.parse(localStorage.getItem(STORAGE_KEYS.WALLET_LOGS) || '[]');
+                logs.unshift({
+                    sender,
+                    amount,
+                    note: note || 'دعم / اشتراك منصة الخلاصة',
+                    time: new Date().toLocaleTimeString('ar-EG', { hour: '2-digit', minute: '2-digit' })
+                });
+                localStorage.setItem(STORAGE_KEYS.WALLET_LOGS, JSON.stringify(logs));
+
+                document.getElementById('wallet-confirm-form').reset();
+                renderWalletLogs();
+                showToast(`تم تسجيل تأكيد تحويل بقيمة ${amount} ج.م بنجاح!`, 'fa-wallet');
+            });
+        }
+
+        function renderWalletLogs() {
+            const logs = JSON.parse(localStorage.getItem(STORAGE_KEYS.WALLET_LOGS) || '[]');
+            const wrapper = document.getElementById('wallet-logs-wrapper');
+            const list = document.getElementById('wallet-logs-list');
+            const count = document.getElementById('wallet-logs-count');
+
+            if (logs.length === 0) {
+                wrapper.classList.add('hidden');
+                return;
+            }
+
+            wrapper.classList.remove('hidden');
+            count.textContent = logs.length;
+            list.innerHTML = logs.map(item => `
+                <div class="p-2.5 rounded-xl bg-mono-white dark:bg-mono-card border border-mono-light dark:border-mono-border flex items-center justify-between text-xs">
+                    <div>
+                        <span class="font-extrabold">${item.amount} ج.م</span>
+                        <span class="text-mono-muted mx-1">•</span>
+                        <span class="text-mono-muted">${item.note}</span>
+                    </div>
+                    <span dir="ltr" class="font-mono text-[11px] text-mono-muted">${item.sender} (${item.time})</span>
+                </div>
+            `).join('');
+        }
+
+        // 10. تهيئة المنصة عند تحميل الصفحة
+        window.addEventListener('DOMContentLoaded', () => {
+            initTheme();
+            initCustomLogo();
+            setup3DLogoInteraction('hero-3d-logo');
+            setup3DLogoInteraction('gate-3d-logo');
+            initAuthGate();
+            initVideos();
+            initWalletSystem();
+        });
+    </script>
+</body>
+</html>
